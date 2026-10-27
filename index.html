@@ -1,0 +1,366 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ISLA VIAJES | Tu viaje comienza aquí</title>
+<meta name="description" content="ISLA VIAJES: vuelos, hoteles, alquiler de autos y viajes a Cuba.">
+<style>
+:root {
+  --blue:#073b50;
+  --turquoise:#08a9a3;
+  --gold:#f4bd59;
+  --light:#f3f9f8;
+  --dark:#173440;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;color:var(--dark);background:white}
+header{
+ display:flex;justify-content:space-between;align-items:center;
+ padding:18px 7%;background:#073b50;color:white;
+ position:sticky;top:0;z-index:10
+}
+.logo{font-size:25px;font-weight:900;letter-spacing:2px}
+.logo span{color:var(--gold)}
+nav{display:flex;gap:22px;align-items:center}
+nav a{color:white;text-decoration:none;font-size:14px}
+nav a:hover{color:var(--gold)}
+button{cursor:pointer;border:0}
+.lang{background:var(--gold);padding:10px 15px;border-radius:20px;font-weight:bold}
+.hero{
+ min-height:570px;padding:100px 8% 130px;color:white;
+ background:linear-gradient(90deg,rgba(0,35,48,.82),rgba(0,50,60,.15)),
+ url('https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=2000&q=85') center/cover;
+}
+.hero h1{font-size:clamp(38px,6vw,68px);max-width:700px;line-height:1.1}
+.hero h1 span{color:var(--gold)}
+.hero p{font-size:19px;margin:22px 0;max-width:550px;line-height:1.6}
+.cta{background:var(--gold);color:#173440;padding:15px 26px;border-radius:30px;font-weight:bold;font-size:15px}
+.search{
+ max-width:1100px;margin:-75px auto 55px;position:relative;
+ background:white;padding:28px;border-radius:15px;
+ box-shadow:0 10px 35px #17344025;
+}
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.tab{padding:12px 20px;border-radius:25px;background:#eaf3f2;color:var(--blue);font-weight:bold}
+.tab.active{background:var(--turquoise);color:white}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:13px}
+label{font-size:12px;font-weight:bold;display:block;margin-bottom:7px}
+input,select,textarea{
+ width:100%;padding:13px;border:1px solid #d9e4e4;
+ border-radius:8px;font-size:14px;background:white
+}
+.search-btn{background:var(--blue);color:white;padding:14px;border-radius:8px;font-weight:bold}
+section{padding:65px 8%}
+.section-title{text-align:center;margin-bottom:38px}
+.section-title h2{font-size:34px;color:var(--blue);margin-bottom:12px}
+.section-title p{color:#71858a}
+.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px}
+.service{
+ background:white;border-radius:14px;overflow:hidden;
+ box-shadow:0 5px 25px #17344013;transition:.3s
+}
+.service:hover{transform:translateY(-5px)}
+.service img{width:100%;height:190px;object-fit:cover}
+.service-content{padding:22px}
+.service h3{color:var(--blue);margin-bottom:10px}
+.service p{color:#71858a;line-height:1.5;margin-bottom:18px}
+.service button{background:var(--turquoise);color:white;padding:11px 18px;border-radius:20px}
+.destination{
+ background:linear-gradient(120deg,#073b50,#087f80);color:white;
+ text-align:center
+}
+.destination h2{font-size:36px;margin-bottom:15px}
+.destination p{max-width:650px;margin:0 auto 25px;line-height:1.7}
+.destination button{background:var(--gold);padding:14px 25px;border-radius:25px;font-weight:bold}
+.contact{background:var(--light)}
+.contact-box{max-width:700px;margin:auto;background:white;padding:30px;border-radius:15px}
+.contact-box input,.contact-box textarea{margin-bottom:15px}
+.contact-box button{width:100%;background:var(--turquoise);color:white;padding:15px;border-radius:8px;font-weight:bold}
+footer{background:#062d3d;color:white;padding:40px 8%;text-align:center}
+footer p{margin:12px 0;color:#c5d7d9}
+.admin{background:#eaf3f2;padding:40px 8%}
+.admin-box{max-width:700px;margin:auto;background:white;padding:25px;border-radius:12px}
+.admin-box h3{margin-bottom:15px;color:var(--blue)}
+.admin-box button{background:var(--blue);color:white;padding:12px 20px;border-radius:7px;margin:5px}
+#adminData{display:none;margin-top:20px;padding:15px;background:#f3f9f8;border-radius:8px}
+.whatsapp{
+ position:fixed;bottom:20px;right:20px;background:#20c66a;color:white;
+ padding:15px 20px;border-radius:30px;text-decoration:none;font-weight:bold;
+ box-shadow:0 4px 15px #0003;z-index:20
+}
+@media(max-width:700px){
+ header{flex-wrap:wrap;gap:15px}
+ nav{width:100%;justify-content:center;flex-wrap:wrap;gap:13px}
+ .hero{padding-top:75px}
+ .search{margin:-65px 12px 35px}
+ section{padding:45px 6%}
+}
+</style>
+</head>
+<body>
+
+<header>
+ <div class="logo">ISLA <span>VIAJES</span></div>
+ <nav>
+  <a href="#inicio" data-es="Inicio" data-en="Home">Inicio</a>
+  <a href="#servicios" data-es="Servicios" data-en="Services">Servicios</a>
+  <a href="#cuba" data-es="Viajes a Cuba" data-en="Trips to Cuba">Viajes a Cuba</a>
+  <a href="#contacto" data-es="Contacto" data-en="Contact">Contacto</a>
+  <button class="lang" onclick="changeLanguage()">ES / EN</button>
+ </nav>
+</header>
+
+<div class="hero" id="inicio">
+ <h1 id="heroTitle">DESCUBRE EL MUNDO, <span>VIVE LA EXPERIENCIA.</span></h1>
+ <p id="heroText">Tu próxima aventura comienza aquí. Encuentra vuelos, hoteles y alquiler de vehículos con ISLA VIAJES.</p>
+ <a href="#reservas"><button class="cta" id="heroButton">PLANIFICA TU VIAJE</button></a>
+</div>
+
+<div class="search" id="reservas">
+ <div class="tabs">
+  <button class="tab active" onclick="selectTab('vuelos',this)">✈ Vuelos</button>
+  <button class="tab" onclick="selectTab('hoteles',this)">⌂ Hoteles</button>
+  <button class="tab" onclick="selectTab('autos',this)">🚗 Autos</button>
+ </div>
+ <form id="searchForm">
+  <div class="fields" id="searchFields"></div>
+  <button class="search-btn" type="submit" style="margin-top:18px;width:100%">BUSCAR OPCIONES</button>
+ </form>
+ <p id="searchMessage" style="margin-top:15px;color:var(--turquoise)"></p>
+</div>
+
+<section id="servicios">
+ <div class="section-title">
+  <h2 id="serviceTitle">Nuestros servicios</h2>
+  <p id="serviceSubtitle">Todo lo que necesitas para viajar tranquilo.</p>
+ </div>
+ <div class="services">
+  <article class="service">
+   <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80" alt="Avión">
+   <div class="service-content">
+    <h3>✈ Vuelos</h3>
+    <p>Consulta opciones de vuelos nacionales e internacionales.</p>
+    <button onclick="requestService('Vuelos')">Solicitar información</button>
+   </div>
+  </article>
+  <article class="service">
+   <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80" alt="Hotel">
+   <div class="service-content">
+    <h3>⌂ Hoteles</h3>
+    <p>Encuentra alojamiento para tus próximas vacaciones.</p>
+    <button onclick="requestService('Hoteles')">Solicitar información</button>
+   </div>
+  </article>
+  <article class="service">
+   <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80" alt="Automóvil">
+   <div class="service-content">
+    <h3>🚗 Renta de autos</h3>
+    <p>Muévete con libertad y comodidad en tu destino.</p>
+    <button onclick="requestService('Renta de autos')">Solicitar información</button>
+   </div>
+  </article>
+  <article class="service">
+   <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=800&q=80" alt="Playa tropical">
+   <div class="service-content">
+    <h3>🌴 Paquetes turísticos</h3>
+    <p>Organizamos experiencias y viajes especiales.</p>
+    <button onclick="requestService('Paquetes turísticos')">Solicitar información</button>
+   </div>
+  </article>
+ </div>
+</section>
+
+<section class="destination" id="cuba">
+ <h2 id="cubaTitle">¡Cuba te espera!</h2>
+ <p id="cubaText">Descubre las playas, ciudades, cultura y encanto de Cuba. En ISLA VIAJES te ayudamos a organizar tu próxima visita.</p>
+ <button onclick="requestService('Viaje a Cuba')" id="cubaButton">PLANIFICAR VIAJE A CUBA</button>
+</section>
+
+<section class="contact" id="contacto">
+ <div class="section-title">
+  <h2 id="contactTitle">Solicita tu reserva</h2>
+  <p id="contactSubtitle">Cuéntanos qué viaje estás buscando.</p>
+ </div>
+ <div class="contact-box">
+  <form id="contactForm">
+   <label>Nombre completo</label>
+   <input id="name" required placeholder="Tu nombre">
+   <label>Correo electrónico</label>
+   <input id="email" type="email" required placeholder="correo@ejemplo.com">
+   <label>Teléfono / WhatsApp</label>
+   <input id="phone" placeholder="Tu número de contacto">
+   <label>Servicio solicitado</label>
+   <select id="service">
+    <option>Vuelos</option>
+    <option>Hoteles</option>
+    <option>Renta de autos</option>
+    <option>Viaje a Cuba</option>
+    <option>Paquetes turísticos</option>
+    <option>Otro</option>
+   </select>
+   <label>Detalles de tu viaje</label>
+   <textarea id="details" rows="4" placeholder="Destino, fechas, cantidad de viajeros..."></textarea>
+   <button type="submit">ENVIAR SOLICITUD</button>
+  </form>
+  <p id="formMessage" style="margin-top:15px"></p>
+ </div>
+</section>
+
+<section class="admin" id="administracion">
+ <div class="admin-box">
+  <h3>Panel administrativo ISLA VIAJES</h3>
+  <p>Acceso de demostración para visualizar las solicitudes recibidas en este navegador.</p>
+  <input type="password" id="adminPassword" placeholder="Contraseña de demostración">
+  <button onclick="adminLogin()">Entrar al panel</button>
+  <div id="adminData">
+   <h3>Solicitudes recibidas</h3>
+   <div id="requests"></div>
+   <button onclick="exportRequests()">Exportar solicitudes</button>
+  </div>
+ </div>
+</section>
+
+<footer>
+ <div class="logo">ISLA <span>VIAJES</span></div>
+ <p id="footerText">Tu próximo destino está más cerca de lo que imaginas.</p>
+ <p>© 2026 ISLA VIAJES. Todos los derechos reservados.</p>
+ <p>Vuelos · Hoteles · Autos · Experiencias</p>
+</footer>
+
+<a class="whatsapp" href="https://wa.me/" target="_blank">WhatsApp</a>
+
+<script>
+let currentTab='vuelos';
+let language='es';
+
+function selectTab(type,button){
+ currentTab=type;
+ document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+ button.classList.add('active');
+ renderFields();
+}
+function renderFields(){
+ const fields=document.getElementById('searchFields');
+ const data={
+ vuelos:[
+ ['Origen','origin','Ciudad de salida'],
+ ['Destino','destination','Ciudad de destino'],
+ ['Salida','departure','date'],
+ ['Regreso','return','date'],
+ ['Viajeros','travelers','number']
+ ],
+ hoteles:[
+ ['Destino','destination','Ciudad o destino'],
+ ['Entrada','departure','date'],
+ ['Salida','return','date'],
+ ['Habitaciones','rooms','number']
+ ],
+ autos:[
+ ['Lugar de recogida','origin','Ciudad'],
+ ['Lugar de devolución','destination','Ciudad'],
+ ['Recogida','departure','date'],
+ ['Devolución','return','date']
+ ]
+ };
+ fields.innerHTML=data[currentTab].map(f=>
+ `<div><label>${f[0]}</label><input name="${f[1]}" type="${f[2]==='date'||f[2]==='number'?f[2]:'text'}" placeholder="${f[2]==='text'?f[2]:''}" ${f[2]==='number'?'min="1" value="1"':''}></div>`
+ ).join('');
+}
+renderFields();
+
+document.getElementById('searchForm').addEventListener('submit',e=>{
+ e.preventDefault();
+ const values=Object.fromEntries(new FormData(e.target));
+ const message='Solicitud de '+currentTab+': '+JSON.stringify(values);
+ document.getElementById('searchMessage').textContent=
+ '¡Gracias! Puedes completar tu solicitud en el formulario de contacto.';
+ document.getElementById('service').value=
+ currentTab==='autos'?'Renta de autos':currentTab==='hoteles'?'Hoteles':'Vuelos';
+ document.getElementById('details').value=message;
+ document.getElementById('contacto').scrollIntoView({behavior:'smooth'});
+});
+
+function requestService(service){
+ document.getElementById('service').value=service;
+ document.getElementById('contacto').scrollIntoView({behavior:'smooth'});
+}
+
+function getRequests(){
+ try{return JSON.parse(localStorage.getItem('islaRequests')||'[]')}
+ catch(e){return []}
+}
+
+document.getElementById('contactForm').addEventListener('submit',e=>{
+ e.preventDefault();
+ const request={
+ name:document.getElementById('name').value,
+ email:document.getElementById('email').value,
+ phone:document.getElementById('phone').value,
+ service:document.getElementById('service').value,
+ details:document.getElementById('details').value,
+ date:new Date().toLocaleString()
+ };
+ const requests=getRequests();
+ requests.push(request);
+ localStorage.setItem('islaRequests',JSON.stringify(requests));
+ document.getElementById('formMessage').textContent=
+ '¡Solicitud preparada! Se ha guardado en este navegador. Para recibirla desde otros dispositivos necesitamos conectar un servidor.';
+ e.target.reset();
+});
+
+function adminLogin(){
+ if(document.getElementById('adminPassword').value!=='ISLA2026'){
+ alert('Contraseña incorrecta');
+ return;
+ }
+ document.getElementById('adminData').style.display='block';
+ const requests=getRequests();
+ document.getElementById('requests').innerHTML=requests.length?
+ requests.map((r,i)=>`<div style="padding:12px;border-bottom:1px solid #ddd">
+ <b>${i+1}. ${escapeHTML(r.name)}</b><br>
+ ${escapeHTML(r.service)}<br>
+ ${escapeHTML(r.email)} · ${escapeHTML(r.phone)}<br>
+ ${escapeHTML(r.details)}<br>
+ <small>${escapeHTML(r.date)}</small></div>`).join('')
+ :'Todavía no hay solicitudes.';
+}
+function escapeHTML(s){
+ return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function exportRequests(){
+ const data=JSON.stringify(getRequests(),null,2);
+ const blob=new Blob([data],{type:'application/json'});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement('a');
+ a.href=url;a.download='solicitudes-isla-viajes.json';a.click();
+ URL.revokeObjectURL(url);
+}
+
+function changeLanguage(){
+ language=language==='es'?'en':'es';
+ const en=language==='en';
+ document.documentElement.lang=language;
+ document.getElementById('heroTitle').innerHTML=en?
+ 'DISCOVER THE WORLD, <span>LIVE THE EXPERIENCE.</span>':
+ 'DESCUBRE EL MUNDO, <span>VIVE LA EXPERIENCIA.</span>';
+ document.getElementById('heroText').textContent=en?
+ 'Your next adventure starts here. Find flights, hotels and car rentals with ISLA VIAJES.':
+ 'Tu próxima aventura comienza aquí. Encuentra vuelos, hoteles y alquiler de vehículos con ISLA VIAJES.';
+ document.getElementById('heroButton').textContent=en?'PLAN YOUR TRIP':'PLANIFICA TU VIAJE';
+ document.getElementById('serviceTitle').textContent=en?'Our services':'Nuestros servicios';
+ document.getElementById('serviceSubtitle').textContent=en?'Everything you need for a worry-free trip.':'Todo lo que necesitas para viajar tranquilo.';
+ document.getElementById('cubaTitle').textContent=en?'Cuba is waiting for you!':'¡Cuba te espera!';
+ document.getElementById('cubaText').textContent=en?'Discover the beaches, cities and culture of Cuba. Let us help organize your next visit.':'Descubre las playas, ciudades, cultura y encanto de Cuba. En ISLA VIAJES te ayudamos a organizar tu próxima visita.';
+ document.getElementById('cubaButton').textContent=en?'PLAN A TRIP TO CUBA':'PLANIFICAR VIAJE A CUBA';
+ document.getElementById('contactTitle').textContent=en?'Request a booking':'Solicita tu reserva';
+ document.getElementById('contactSubtitle').textContent=en?'Tell us about the trip you are looking for.':'Cuéntanos qué viaje estás buscando.';
+ document.getElementById('footerText').textContent=en?'Your next destination is closer than you think.':'Tu próximo destino está más cerca de lo que imaginas.';
+ document.querySelectorAll('nav a').forEach(a=>{
+ a.textContent=a.dataset[language];
+ });
+}
+</script>
+</body>
+</html>
